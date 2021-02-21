@@ -2,7 +2,7 @@
 title:  React使用高德地图 （react-amap）
 date: 2021-02-04
 categories:
- - mini-programs
+ - javaScript
 tags:
  - js
  - 高德地图

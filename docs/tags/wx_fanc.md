@@ -2,7 +2,7 @@
 title:  微信小程序中，值得收藏的一些处理方法
 date: 2021-02-04
 categories:
- - mini-programs
+ - 微信小程序
 tags:
  - js
  - 微信小程序

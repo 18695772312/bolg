@@ -56,7 +56,7 @@ css部分
     margin: -10px 0 0 -2px;
 }
 ```
-![avatar](/assets/img/README.png)
+![avatar](https://i.loli.net/2021/02/21/KeF4GkHfx5pjQ7R.png)
 
 ## border与透明边框的技巧之优雅增加点击区域之搜索框清除按钮实例页面
 HTML：

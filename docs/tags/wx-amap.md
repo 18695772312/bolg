@@ -2,7 +2,7 @@
 title:  微信小程序接入高德地图详解
 date: 2021-02-04
 categories:
- - mini-programs
+ - 微信小程序
 tags:
  - js
  - 微信小程序

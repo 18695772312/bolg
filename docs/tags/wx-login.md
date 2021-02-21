@@ -2,7 +2,7 @@
 title:  微信小程序授权登录，授权手机号步骤和详解
 date: 2021-02-04
 categories:
- - mini-programs
+ - 微信小程序
 tags:
  - js
  - 微信小程序
