@@ -12,12 +12,41 @@ dva 首先是一个基于 redux 和 redux-saga 的数据流方案，然后为了
 
 它相当于Vue中的vuex,是一个公用的仓库，公用存放state的仓库
 
+> 安装
+```
+yarn add dva
+```
+## 在入口文中使用dva
+
+```js
+// index.js
+import React from 'react';
+import dva from 'dva';
+import App from './App';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
+const app = dva({
+  history,
+});
+// 注册视图
+app.router(() => <App />);
+// 加载model模块
+app.model(require('./models/song').default);// song.js模块
+app.model(require('./models/login').default); //login.js
+// 启动应用
+app.start('#root');
+
+```
+
 > 概念
 
 ::: right
  参考文档 [掘金](https://juejin.cn/post/6844903745885569038)
 [简书](https://www.jianshu.com/p/21f8ed30e761)
 :::
+
+
 ## model
 model是使用DVA的核心，基本的属性如下：
 - namespace：model 的命名空间，只能用字符串。一个大型应用可能包含多个 model，通过namespace区分。
@@ -36,6 +65,23 @@ const Model = {
     minus(count) { return count - 1 },
   },
 }
+```
+## effects
+
+参考实例
+```js
+ *fetchSong(_, { call, put, select }) {
+    //getSongDetail 接口名
+    //payload 参数
+    const response = yield call(getSongDetail, payload)
+    // 调用reducers方法修改state
+    yield put({
+      type: 'getSongs',
+      payload: {
+        data:response.songs,
+      }
+    });
+ }
 ```
 
 ## connect
@@ -61,6 +107,10 @@ const App = connect(({ count }) => ({
     </div>
   );
 });
+// 或者写成
+export default connect(({ user }) => ({
+  user
+}))(Login);
 ```
 
 ## dispatch
@@ -75,3 +125,21 @@ const handleAdd = () {
 const handleMinus  = () {
   props.dispatch({type: 'count/minus'})
 }
+// 若带参数
+props.dispatch({
+  type: 'user/saveUser',
+  payload: { data: res, isLogin: true }
+});
+// 可以调用user中的reducers下的saveUser方法
+reducers: {
+    saveUser(state, { payload}){
+      return {
+        ...state,
+        user:payload.data,
+        isLogin:payload.isLogin
+      }
+    },
+  }
+```
+
+
