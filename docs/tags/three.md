@@ -1,5 +1,5 @@
 ---
-title: 关于使用antd树形控件遇到的问题
+title: 关于使用antd和element-UI树形控件遇到的问题
 date: 2021-03-17
 categories:
  - javaScript
@@ -7,6 +7,8 @@ tags:
  - js
  - React
  - antd
+ - vue
+ - element-UI
 ---
 
 ## Tree树形控件的几本使用
@@ -115,3 +117,40 @@ onCheck = (checkedKeys, info) => {
   }
 // 这样拿到的key就是最后需要传给后台的key
 ```
+
+## element-UI树形组件
+改变默选中的复选框，视图没有改变问题，这个是因为el-tree是default-checked-keys不是响应式是，查阅文档发现el-tree提供了一个方法来改变数据实现响应式
+
+```html
+    <el-tree
+      ref="tree"
+      :data="threeData"
+      show-checkbox
+      node-key="id"
+      :default-checked-keys="checked"
+      :props="defaultProps"
+      @check="checkChange"
+    />
+```
+setCheckedKeys实现数据响应式
+```js
+    reset(arr) {
+      this.$nextTick(function () {
+        //Dom更新完毕
+        this.$refs.tree.setCheckedKeys(arr);
+      });
+    },
+```
+与antd相同的是，当传入父节点ID时，它的所有子节点都会被勾选，
+所有解决办法就是遍历树形数据取到所有父节点ID，与后端提供默认选中的ID比较，除去父节点ID。
+
+点击复选框改变选中节点需要
+提供父节点的ID再传给后端所以
+```js
+    checkChange(_,keys) {
+      const { checkedKeys, halfCheckedKeys } = keys
+      this.lastKey = [...checkedKeys, ...halfCheckedKeys]
+      console.log(this.lastKey)
+    },
+```
+

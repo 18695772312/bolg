@@ -31,6 +31,7 @@ moment(1448896064621).toDate(); // Mon Nov 30 2015 23:07:44 GMT+0800 (中国标�
 moment(moment(1448896064621).toDate()).format('YYYY-MM-DD HH:mm:ss') // 2015-11-30 23:07:44
 
 ```
+> 注意传入的时间戳是数值类型不是字符串
 
 ## 时间加减
 
