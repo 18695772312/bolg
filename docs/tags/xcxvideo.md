@@ -53,3 +53,25 @@ tags:
 ::: right
 来自 [参考]](https://juejin.cn/post/6844903768903925768#heading-0)
 :::
+
+但其实以上的方式还有一个问题就是当滑动轮播图的时候cover-image图标会跑
+
+所以HTML布局解决方式就是不用cover-view与cover-image组件
+
+```html
+          <view>
+            <video wx:if="{{!showImg}}" id="myVideo" src="{{src}}" autoplay="{{autoplay}}"
+              style="width:100%;height:100%;position: absolute;">
+            </video>
+            <view class="vidio">
+              <!-- 覆盖图片 -->
+              <image wx:if="{{showImg}}" class="images" src="{{item.cover}}" mode="widthFix" style="width:100%;">
+              </image>
+              <!-- 播放按钮 -->
+              <image class="play-img" src="/assets/images/icons/play.png" mode="widthFix"
+                style="display:{{!showImg?'none':'block'}}" bindtap="hanldePaly"></image>
+            </view>
+          </view>
+```
+
+当显示图片的时候就用wx:if控制是否渲染video标签，当点击播放图标的时候，就让图片隐藏，显示video，这样在安卓机上也可以适配
