@@ -82,8 +82,12 @@ arr.some(function(elem, index, array) {}, obj)
 参数2：更改第一个参数函数的this指向。如果为null, undefined则依然指向window，如果是指向基本类型数据，则会指向相应的包装类。
 
 
+### find()   
 
-
+```js
+[1,2].find(item =>{ return item ==1})
+//输出1
+```
 
 ### reduce()   归纳函数  无比重要！
 
@@ -141,5 +145,3 @@ console.log(nArr)     //  [2, 4]
 ### reduceRight()
 
 就是reduce()的倒序
-
- 
