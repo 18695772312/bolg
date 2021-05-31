@@ -3,7 +3,7 @@ title: 微信小程序实现生成海报并分享给好友
 date: 2021-05-31
 categories: 微信小程序
 tags:
-- js
+- 微信小程序
 ---
 
 ```html
@@ -57,7 +57,7 @@ tags:
     var nickName =wx.getStorageSync('openidMsg').user_id;//昵称
     var bgImgPath = that.data.bgImgPath;//封面大图
     var xcxcode = that.data.codeImg;//二维码
-    // 第三张图片（封面大图）
+    // （封面大图）
     ctx.drawImage(bgImgPath, 0, 0, 279,495);
     //绘制id
     ctx.setFontSize(8.5);
