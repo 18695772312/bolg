@@ -31,6 +31,18 @@ tags:
       console.log(e.detail.userInfo) // 用户信息对象
     }
   },
+  // 日前微信出了心的api旧的api被废弃，
+  // 新api
+  wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        const data = {
+          avatar: res.userInfo.avatarUrl,
+          sex: res.userInfo.gender,
+          nickname: res.userInfo.nickName
+        }
+  })
+
 ```
 ## 授权用户手机号
 - 获取微信用户绑定的手机号，需先调用wx.login接口。
