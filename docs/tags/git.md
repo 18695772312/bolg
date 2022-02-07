@@ -35,3 +35,9 @@ git push -f // 提交代码git push --force
 git cherry-pick 'commit id'
 
 ```
+## 查看版本号
+
+```js
+npm view 包名 versions
+
+```
