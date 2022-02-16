@@ -6,6 +6,25 @@ module.exports = {
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
   ],
   base: '/blog/',
+  plugins: [
+    [
+      '@vuepress-reco/vuepress-plugin-kan-ban-niang',
+      {
+        theme: ['shizuku', 'miku','wanko','blackCat', 'whiteCat', 'haru1', 'haru2', 'haruto', 'koharu', 'izumi', 'z16']
+      }
+    ],
+    ['cursor-effects', {
+      size: 2, // size of the particle, default: 2
+      shape: 'star', // ['star' | 'circle'], // shape of the particle, default: 'star'
+      zIndex: 999999999, // z-index property of the canvas, default: 999999999
+    }],
+    ["vuepress-plugin-nuggets-style-copy", {
+      copyText: "复制代码",
+      tip: {
+          content: "复制成功"
+      }
+   }]
+  ],
   
   theme: 'reco',
   themeConfig: {
@@ -39,6 +58,10 @@ module.exports = {
         desc: 'Enjoy when you can, and endure when you must.',
         email: 'recoluan@qq.com',
         link: 'https://www.recoluan.com'
+      },
+      {
+        title: '地球反三体组织',
+        link: 'http://www.woai996.com/'
       },
     ],//  友情链接
     author: 'y_chunli',
