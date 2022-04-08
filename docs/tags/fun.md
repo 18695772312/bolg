@@ -45,3 +45,46 @@ const isEmptyObj = obj => (
             }
 
 ```
+## 数组对象去重
+
+
+```js
+    // 第一种
+    function getUnique(arr) {
+        const newArr = arr.map(item => {
+            return JSON.stringify(item)
+        })
+        return [...new Set(newArr)].map(item => JSON.parse(item))
+    }
+    // 第二种
+    function getUnique2(arr) {
+        const map = {};
+        // 1、把数组元素作为对象的键存起来（这样就算有重复的元素，也会相互替换掉）
+        /* eslint-disable */
+        arr.forEach(item => map[JSON.stringify(item)] = item);
+        // 2、再把新对象的键名抽成一个数组返回即为不重复的集合
+        return Object.keys(map).map(key => JSON.parse(key));
+    }
+    // 以上两种方式都存在一个问题，但对象的key顺序不同，就排查不出重复的对象
+
+    // 第三种
+    let arr = [{id:1,name:12},{id:2,name:12},{id:1,name:13}];
+
+    const getUnique3 = (arr)=>{
+        return Object.entries(arr.reduce((obj,item)=>{
+            obj[item.id] = item
+            return obj
+        },{})).map(item=>item[1])
+    }
+    console.log(getUnique3(arr)) // [{id:1,name:13},{id:2,name:12}]
+    // Object.entries() 方法返回一个给定对象自身可枚举属性的键值对数组
+    //  传入对象
+    const obj = { foo: 'bar', baz: 'abc' }; 
+    console.log(Object.entries(obj));  // [['foo', 'bar'], ['baz', 'abc']]
+    // 数组
+    const arr = [1, 2, 3]; 
+    console.log(Object.entries(arr));  // [['0', 1], ['1', '2'], ['2', '3']]
+    // 数组对象
+    const arr2 = [{ a: 1 }, { b: 2 }, { c: 3 }]; 
+    console.log(Object.entries(arr2));  // [['0', { a: 1 }], ['1', { b: 2 }], ['2', { c: 3 }]]
+```
