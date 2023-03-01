@@ -253,6 +253,12 @@ const p = new Proxy(person,{
       })
   }
   ```
+
+
+
+
+
+
   ### 2. watch函数
   ```js
   import {ref, watch, reactive} from 'vue'
@@ -296,6 +302,17 @@ const p = new Proxy(person,{
       }
   }
   ```
+
+## watch 的使用
+
+- watch的API完全等同于组件watch选项的property
+  - watch需要监听特定的数据源，并在回调函数中执行副作用；
+  - 默认情况下他都是惰性的，只有当被侦听的源发生过变化时才会执行回调；
+
+- 与watchEffect的比较，watch允许我们：
+  - 懒执行副作用（第一次不会直接执行）
+  - 更具体的说明当哪些状态发生变化时，触发侦听器的执行；
+  - 访问的侦听状态变化前后的值
  ### 3. watchEffect函数
  * watch的套路是：既要声明监视的属性，也要指明监视的回调。
  * watchEffect的套路是：不用指明监视哪个属性，监视的回调中用到哪个属性，就监视哪个属性。
@@ -311,3 +328,20 @@ watchEffect(() => {
     console.log('watchEffect配置的回调执行了')
 })
 ```
+## 调整watchEffect的 执行时机
+
+- 如果我们希望在第一次的时候打印出来对应的元素
+  - 这个时候我们需要改变副作用函数的执行时机
+  - 他的默认值的pre，会在元素挂载或者更新之前执行；
+  - 所以我们会先打印出来一个null，当依赖的title发生改变时，就会再执行一次，打印出元素
+
+- 我们可以设置副作用的执行时机
+
+  ```js
+  watchEffect(() => {
+
+  }, {
+    flush: 'post'
+  })
+  ```
+
