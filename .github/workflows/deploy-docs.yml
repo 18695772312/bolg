@@ -1,0 +1,33 @@
+name: 部署文档
+ 
+on:
+  push:
+    branches:
+      - master
+ 
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false 
+
+      - name: 构建文档
+        env: 
+          NODE_OPTIONS: --max_old_space_size=8191
+        run: |-
+          npm run docs:build
+          > docs\.vuepress\dist  
+        
+      - name: 部署文档 🔧
+        uses: JamesIves/github-pages-deploy-action@v4
+        env: 
+          GITHUB_TOKEN:${{}}
+        with:
+           # 部署文档
+          branch: blog.pages
+          folder: docs\.vuepress\dist
+      
+ 
